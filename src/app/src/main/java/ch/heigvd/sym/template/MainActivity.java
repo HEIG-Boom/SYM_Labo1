@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Show the welcome screen / login authentication dialog
-        setContentView(R.layout.authent);
+        setContentView(R.layout.authent_rel);
 
         // Add users
         users.put("toto@tutu.com", new Pair<>("tata", "toto.jpg"));
