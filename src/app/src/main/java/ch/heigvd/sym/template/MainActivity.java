@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, ch.heigvd.sym.template.LoginSucceededActivity.class);
                 intent.putExtra("emailEntered", mail);
                 intent.putExtra("passwordGiven", psw);
-                this.startActivity(intent);
+                startActivity(intent);
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.good), Toast.LENGTH_LONG).show();
                 finish();
             } else {
