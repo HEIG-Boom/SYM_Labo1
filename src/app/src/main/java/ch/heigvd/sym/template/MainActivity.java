@@ -32,18 +32,21 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.util.Pair;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     // For logging purposes
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    // Just for test purposes : please destroy !
-    private static final String VALID_EMAIL = "toto@tutu.com";
-    private static final String VALID_PASSWORD = "tata";
+    // Hard coded users
+    private Map<String, Pair<String, String>> users = new HashMap<>();
 
     // GUI elements
     private EditText email = null;
@@ -55,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Show the welcome screen / login authentication dialog
         setContentView(R.layout.authent);
+
+        // Add users
+        users.put("toto@tutu.com", new Pair<>("tata", "toto.jpg"));
+        users.put("abc@def.com", new Pair<>("ghi", "abc.jpg"));
+        users.put("tztz@tutu.com", new Pair<>("tmtm", "tztz.jpg"));
 
         // Link to GUI elements
         this.email = findViewById(R.id.email);
@@ -90,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
             Log.w(TAG, "isValid(mail, password) - mail and password cannot be null !");
             return false;
         }
-        // Return true if combination valid, false otherwise
-        return (mail.equals(VALID_EMAIL) && password.equals(VALID_PASSWORD));
+        // Check if the user exists
+        return (users.containsKey(mail)) && password.equals(users.get(mail).first);
     }
 
     private void showErrorDialog() {
