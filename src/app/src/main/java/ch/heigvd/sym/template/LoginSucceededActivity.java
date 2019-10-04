@@ -2,11 +2,10 @@ package ch.heigvd.sym.template;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class LoginSucceededActivity extends AppCompatActivity {
 
@@ -24,5 +23,10 @@ public class LoginSucceededActivity extends AppCompatActivity {
         Intent intent = getIntent();
         email.setText(intent.getStringExtra("emailEntered"));
         password.setText(intent.getStringExtra("passwordGiven"));
+
+        // Return intent for question 4
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("result", "test");
+        setResult(Activity.RESULT_OK, returnIntent);
     }
 }

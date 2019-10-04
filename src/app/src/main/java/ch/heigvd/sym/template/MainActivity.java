@@ -25,6 +25,7 @@
  */
 package ch.heigvd.sym.template;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     // Just for test purposes : please destroy !
     private static final String VALID_EMAIL = "toto@tutu.com";
     private static final String VALID_PASSWORD = "tata";
+    public static final int TEST_ACTIVITY_RETURN = 1;
 
     // GUI elements
     private EditText email = null;
@@ -73,9 +75,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, ch.heigvd.sym.template.LoginSucceededActivity.class);
                 intent.putExtra("emailEntered", mail);
                 intent.putExtra("passwordGiven", psw);
-                startActivity(intent);
+                startActivityForResult(intent, TEST_ACTIVITY_RETURN);
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.good), Toast.LENGTH_LONG).show();
-                finish();
             } else {
                 // Wrong combination, display pop-up dialog and stay on login screen
                 showErrorDialog();
@@ -109,4 +110,15 @@ public class MainActivity extends AppCompatActivity {
         alertbd.create().show();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == TEST_ACTIVITY_RETURN) {
+            if (resultCode == Activity.RESULT_OK) {
+                String result = data.getStringExtra("result");
+                System.out.println("yeah " + result);
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
