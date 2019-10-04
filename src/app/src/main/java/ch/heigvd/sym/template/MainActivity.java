@@ -69,12 +69,11 @@ public class MainActivity extends AppCompatActivity {
 
             if (!mail.contains("@")) {
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.wrongmail), Toast.LENGTH_LONG).show();
-            }
-            else if (isValid(mail, psw)) {
-                 Intent intent = new Intent(this, ch.heigvd.sym.template.LoginSucceededActivity.class);
-                 intent.putExtra("emailEntered", mail);
-                 intent.putExtra("passwordGiven", psw);
-                 this.startActivity(intent);
+            } else if (isValid(mail, psw)) {
+                Intent intent = new Intent(this, ch.heigvd.sym.template.LoginSucceededActivity.class);
+                intent.putExtra("emailEntered", mail);
+                intent.putExtra("passwordGiven", psw);
+                this.startActivity(intent);
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.good), Toast.LENGTH_LONG).show();
                 finish();
             } else {
