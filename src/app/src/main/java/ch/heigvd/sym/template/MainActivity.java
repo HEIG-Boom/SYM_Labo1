@@ -64,12 +64,12 @@ public class MainActivity extends AppCompatActivity {
         signIn.setOnClickListener((v) -> {
 
             String mail = email.getText().toString();
-            String password = this.password.getText().toString();
+            String psw = password.getText().toString();
 
             if (!mail.contains("@")) {
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.wrongmail), Toast.LENGTH_LONG).show();
             }
-            else if (isValid(mail, password)) {
+            else if (isValid(mail, psw)) {
                 /* Ok, valid combination, do something or launch another activity...
                  * The current activity could be finished, but it is not mandatory.
                  * To launch activity MyActivity.class, try something like :
@@ -90,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 // Wrong combination, display pop-up dialog and stay on login screen
                 showErrorDialog();
+                email.getText().clear();
+                password.getText().clear();
             }
         });
     }
