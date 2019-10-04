@@ -25,6 +25,7 @@
  */
 package ch.heigvd.sym.template;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -70,21 +71,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.wrongmail), Toast.LENGTH_LONG).show();
             }
             else if (isValid(mail, password)) {
-                /* Ok, valid combination, do something or launch another activity...
-                 * The current activity could be finished, but it is not mandatory.
-                 * To launch activity MyActivity.class, try something like :
-                 *
-                 * 			Intent intent = new Intent(this, ch.heigvd.sym.MyActivity.class);
-                 * 			intent.putExtra("emailEntered", mail);
-                 *			intent.putExtra("passwordGiven", password);
-                 *			this.startActivity(intent);
-                 *
-                 * Alternately, you could also startActivityForResult if you are awaiting a result.
-                 * In the latter case, you have to indicate an int parameter to identify MyActivity
-                 *
-                 * If you haven't anything more to do, you may finish()...
-                 * But just display a small message before quitting...
-                 */
+                 Intent intent = new Intent(this, ch.heigvd.sym.template.LoginSucceededActivity.class);
+                 intent.putExtra("emailEntered", mail);
+                 intent.putExtra("passwordGiven", password);
+                 this.startActivity(intent);
+
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.good), Toast.LENGTH_LONG).show();
                 finish();
             } else {
