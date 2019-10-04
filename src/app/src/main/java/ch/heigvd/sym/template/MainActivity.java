@@ -65,22 +65,23 @@ public class MainActivity extends AppCompatActivity {
         signIn.setOnClickListener((v) -> {
 
             String mail = email.getText().toString();
-            String password = this.password.getText().toString();
+            String psw = password.getText().toString();
 
             if (!mail.contains("@")) {
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.wrongmail), Toast.LENGTH_LONG).show();
             }
-            else if (isValid(mail, password)) {
+            else if (isValid(mail, psw)) {
                  Intent intent = new Intent(this, ch.heigvd.sym.template.LoginSucceededActivity.class);
                  intent.putExtra("emailEntered", mail);
-                 intent.putExtra("passwordGiven", password);
+                 intent.putExtra("passwordGiven", psw);
                  this.startActivity(intent);
-
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.good), Toast.LENGTH_LONG).show();
                 finish();
             } else {
                 // Wrong combination, display pop-up dialog and stay on login screen
                 showErrorDialog();
+                email.getText().clear();
+                password.getText().clear();
             }
         });
     }
