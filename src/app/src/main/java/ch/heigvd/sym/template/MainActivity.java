@@ -25,6 +25,7 @@
  */
 package ch.heigvd.sym.template;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Hard coded users
     private Map<String, Pair<String, String>> users = new HashMap<>();
+    private static final int TEST_ACTIVITY_RETURN = 1;
 
     // GUI elements
     private EditText email = null;
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, ch.heigvd.sym.template.LoginSucceededActivity.class);
                 intent.putExtra("emailEntered", mail);
                 intent.putExtra("passwordGiven", psw);
-                startActivity(intent);
+                startActivityForResult(intent, TEST_ACTIVITY_RETURN);
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.good), Toast.LENGTH_LONG).show();
             } else {
                 // Wrong combination, display pop-up dialog and stay on login screen
@@ -117,6 +119,19 @@ public class MainActivity extends AppCompatActivity {
             // dialog close automatically
         });
         alertbd.create().show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == TEST_ACTIVITY_RETURN) {
+            if (resultCode == Activity.RESULT_OK) {
+                String result = data.getStringExtra("result");
+                // Just log the IMEI returned
+                Log.d(MainActivity.TAG, "The IMEI returned is: " + result);
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
