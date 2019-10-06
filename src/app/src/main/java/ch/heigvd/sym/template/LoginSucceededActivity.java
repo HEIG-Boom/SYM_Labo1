@@ -60,6 +60,9 @@ public class LoginSucceededActivity extends AppCompatActivity {
 
         // Question 5
         String imei = getIMEI();
+        if (imei == null) {
+            imei = "null";
+        }
         imeiField.setText(imei);
 
         // Return intent (with IMEI) for question 4
