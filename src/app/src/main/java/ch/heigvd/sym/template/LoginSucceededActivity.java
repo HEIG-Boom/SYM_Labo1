@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,8 @@ import java.io.File;
 
 public class LoginSucceededActivity extends AppCompatActivity {
     public static final int READ_EXTERNAL_STORAGE = 112;
+
+    private static final String TAG = LoginSucceededActivity.class.getSimpleName();
 
     private TextView email;
     private TextView password;
@@ -29,6 +32,8 @@ public class LoginSucceededActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_succeeded);
+
+        Log.d(LoginSucceededActivity.TAG, "onPause");
 
         image = findViewById(R.id.userImage);
         email = findViewById(R.id.usernameSuccess);
@@ -78,5 +83,47 @@ public class LoginSucceededActivity extends AppCompatActivity {
         File imageFile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS + "/" + username + ".jpeg");
         Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
         image.setImageBitmap(bitmap);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Log.d(LoginSucceededActivity.TAG, "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.d(LoginSucceededActivity.TAG, "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        Log.d(LoginSucceededActivity.TAG, "onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        Log.d(LoginSucceededActivity.TAG, "onStop");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        Log.d(LoginSucceededActivity.TAG, "onRestart");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Log.d(LoginSucceededActivity.TAG, "onDestroy");
     }
 }

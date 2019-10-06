@@ -56,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d(MainActivity.TAG, "onCreate");
+
         // Show the welcome screen / login authentication dialog
         setContentView(R.layout.authent_rel);
 
@@ -116,4 +119,45 @@ public class MainActivity extends AppCompatActivity {
         alertbd.create().show();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Log.d(MainActivity.TAG, "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.d(MainActivity.TAG, "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        Log.d(MainActivity.TAG, "onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        Log.d(MainActivity.TAG, "onStop");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        Log.d(MainActivity.TAG, "onRestart");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Log.d(MainActivity.TAG, "onDestroy");
+    }
 }
