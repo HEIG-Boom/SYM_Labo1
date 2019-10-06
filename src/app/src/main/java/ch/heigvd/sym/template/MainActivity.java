@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("passwordGiven", psw);
                 startActivity(intent);
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.good), Toast.LENGTH_LONG).show();
-                finish();
             } else {
                 // Wrong combination, display pop-up dialog and stay on login screen
                 showErrorDialog();
