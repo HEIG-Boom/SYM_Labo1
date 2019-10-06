@@ -1,3 +1,8 @@
+/*
+ * File     : LoginSucceededActivity.java
+ * Project  : TemplateActivity
+ * Authors  : Jael Dubey, Loris Gilliand, Mateo Tutic, Luc Wachter
+ */
 package ch.heigvd.sym.template;
 
 import androidx.annotation.NonNull;
