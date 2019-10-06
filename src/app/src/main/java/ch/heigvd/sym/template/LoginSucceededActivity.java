@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -34,6 +35,7 @@ public class LoginSucceededActivity extends AppCompatActivity {
 
     private TextView email;
     private TextView password;
+    private TextView imeiField;
     private ImageView image;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -42,11 +44,12 @@ public class LoginSucceededActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_succeeded);
 
-        Log.d(LoginSucceededActivity.TAG, "onPause");
+        Log.d(LoginSucceededActivity.TAG, "onCreate");
 
         image = findViewById(R.id.userImage);
         email = findViewById(R.id.usernameSuccess);
         password = findViewById(R.id.passwordSuccess);
+        imeiField = findViewById(R.id.IMEI);
 
         Intent intent = getIntent();
         email.setText(intent.getStringExtra("emailEntered"));
@@ -57,6 +60,7 @@ public class LoginSucceededActivity extends AppCompatActivity {
 
         // Question 5
         String imei = getIMEI();
+        imeiField.setText(imei);
 
         // Return intent (with IMEI) for question 4
         Intent returnIntent = new Intent();
@@ -141,7 +145,7 @@ public class LoginSucceededActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private String getIMEI() {
-        TelephonyManager tm = (TelephonyManager) getSystemService(this.TELEPHONY_SERVICE);
+        TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         assert tm != null;
 
         String imei = null;
