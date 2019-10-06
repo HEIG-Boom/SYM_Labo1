@@ -1,6 +1,7 @@
 package ch.heigvd.sym.template;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -11,9 +12,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.telephony.TelephonyManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +31,7 @@ public class LoginSucceededActivity extends AppCompatActivity {
     private TextView password;
     private ImageView image;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +50,12 @@ public class LoginSucceededActivity extends AppCompatActivity {
         // Set user image from downloaded files
         readSDcardDownloadedFiles();
 
-        // Return intent for question 4
+        // Question 5
+        String imei = getIMEI();
+
+        // Return intent (with IMEI) for question 4
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("result", "test");
+        returnIntent.putExtra("result", imei);
         setResult(Activity.RESULT_OK, returnIntent);
     }
 
@@ -125,5 +132,23 @@ public class LoginSucceededActivity extends AppCompatActivity {
         super.onDestroy();
 
         Log.d(LoginSucceededActivity.TAG, "onDestroy");
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private String getIMEI() {
+        TelephonyManager tm = (TelephonyManager) getSystemService(this.TELEPHONY_SERVICE);
+        assert tm != null;
+
+        String imei = null;
+
+        if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                imei = tm.getImei();
+            } else {
+                imei = tm.getDeviceId();
+            }
+        }
+
+        return imei;
     }
 }
